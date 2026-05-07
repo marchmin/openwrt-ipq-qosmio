@@ -332,3 +332,8 @@
 	qcom,bdf-addr = <0x4d100000>;
 	qcom,m3-dump-addr = <0x4df00000>;
 };
+
+&wifi2 {
+	// QCN6122 5G/6G
+	status = "disabled";
+};
