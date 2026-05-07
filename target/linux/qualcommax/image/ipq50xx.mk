@@ -36,7 +36,7 @@ define Device/elecom_wrc-x3000gs2
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := ELECOM
 	DEVICE_MODEL := WRC-X3000GS2
-	DEVICE_DTS_CONFIG := config@mp03.3
+	DEVICE_DTS_CONFIG := config@mp03.3-v1
 	SOC := ipq5018
 	KERNEL_IN_UBI := 1
 	BLOCKSIZE := 128k
@@ -51,26 +51,6 @@ define Device/elecom_wrc-x3000gs2
 endef
 TARGET_DEVICES += elecom_wrc-x3000gs2
 
-define Device/glinet_gl-b3000
-	$(call Device/FitImage)
-	DEVICE_VENDOR := GL.iNet
-	DEVICE_MODEL := GL-B3000
-	SOC := ipq5018
-	KERNEL_IN_UBI := 1
-	BLOCKSIZE := 128k
-	PAGESIZE := 2048
-	NAND_SIZE := 128m
-	DEVICE_DTS_CONFIG := config@mp03.5-c1
-	SUPPORTED_DEVICES += b3000
-	BOOT_SCRIPT:= glinet_gl-b3000.bootscript
-	IMAGES := factory.img sysupgrade.bin
-	IMAGE/factory.img := append-ubi | gl-qsdk-factory | append-metadata
-	DEVICE_PACKAGES := \
-		ath11k-firmware-ipq5018-qcn6122 \
-		ipq-wifi-glinet_gl-b3000 \
-		dumpimage
-endef
-TARGET_DEVICES += glinet_gl-b3000
 
 define Device/iodata_wn-dax3000gr
 	$(call Device/FitImageLzma)
