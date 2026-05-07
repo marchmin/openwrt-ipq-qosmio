@@ -118,14 +118,17 @@
 &wifi {
 	// IPQ5018
 	nss-radio-priority = <0>;
+	status = "disabled";
 };
 
 &wifi1 {
 	// QCN6102 5G
 	nss-radio-priority = <1>;
+	status = "disabled";
 };
 
 &wifi2 {
 	// QCN6122 5G/6G
 	nss-radio-priority = <1>;
+	status = "disabled";
 };
