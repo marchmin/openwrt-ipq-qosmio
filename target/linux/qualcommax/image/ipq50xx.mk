@@ -53,7 +53,7 @@ define Device/elecom_wrc-x3000gs2
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := ELECOM
 	DEVICE_MODEL := WRC-X3000GS2
-	DEVICE_DTS_CONFIG := config@mp03.3
+	DEVICE_DTS_CONFIG := config@mp03.3-v1
 	SOC := ipq5018
 	KERNEL_IN_UBI := 1
 	BLOCKSIZE := 128k
