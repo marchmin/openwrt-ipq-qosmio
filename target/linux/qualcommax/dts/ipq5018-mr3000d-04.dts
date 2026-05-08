@@ -375,7 +375,7 @@
 	};
 
 	serial_0_pins: uart0-state {
-		pins = "gpio20", "gpio21";
+		pins = "gpio28", "gpio29";
 		function = "blsp0_uart1";
 		drive-strength = <8>;
 		bias-disable;
