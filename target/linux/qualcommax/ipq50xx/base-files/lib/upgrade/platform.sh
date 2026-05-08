@@ -180,6 +180,7 @@ platform_pre_upgrade() {
 platform_do_upgrade() {
 	case "$(board_name)" in
 	cmcc,mr3000d-ci|\
+	cmcc,mr3000d-04|\
 	cmcc,pz-l8|\
 	elecom,wrc-x3000gs2|\
 	iodata,wn-dax3000gr)
