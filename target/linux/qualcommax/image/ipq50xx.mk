@@ -35,6 +35,22 @@ define Device/cmcc_mr3000d-ci
 endef
 TARGET_DEVICES += cmcc_mr3000d-ci
 
+define Device/cmcc_mr3000d-04
+	$(call Device/FitImageLzma)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := CMCC
+	DEVICE_MODEL := MR3000D-04
+	DEVICE_DTS_CONFIG := config@mp03.3-v1
+	SOC := ipq5018
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	IMAGE_SIZE := 59392k
+	NAND_SIZE := 128m
+	DEVICE_PACKAGES := ath11k-firmware-ipq5018-qcn6122 \
+		ipq-wifi-cmcc_mr3000d-ci
+endef
+TARGET_DEVICES += cmcc_mr3000d-04
+
 define Device/cmcc_pz-l8
 	$(call Device/FitImageLzma)
 	$(call Device/UbiFit)
