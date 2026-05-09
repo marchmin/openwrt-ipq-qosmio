@@ -1,27 +1,31 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-&soc {
-	nss-common {
-		compatible = "qcom,nss-common";
-		reg = <0x01868010 0x01>;
-		reg-names = "nss-misc-reset";
-		memory-region = <&nss_region>;
+/ {
+	nss_dummy_reg: nss-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "nss-reg";
+		regulator-min-microvolt = <848000>;
+		regulator-max-microvolt = <848000>;
+		regulator-always-on;
+		regulator-boot-on;
 	};
+};
+
+&soc {
 
 	nss0: nss@40000000 {
 		compatible = "qcom,nss";
 		interrupts = <GIC_SPI 402 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 401 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 400 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 399 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 398 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 397 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 396 IRQ_TYPE_EDGE_RISING>,
-			     <GIC_SPI 395 IRQ_TYPE_EDGE_RISING>;
-		reg = <0x07a00000 0x100>,
-		      <0x0b111000 0x1000>;
-		reg-names = "nphys",
-		            "qgic-phys";
+		     	 <GIC_SPI 401 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 400 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 399 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 398 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 397 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 396 IRQ_TYPE_EDGE_RISING>,
+		     	 <GIC_SPI 395 IRQ_TYPE_EDGE_RISING>;
+
+		reg = <0x07a00000 0x100>, <0x0b111000 0x1000>;
+		reg-names = "nphys", "qgic-phys";
 		clocks = <&gcc GCC_UBI0_CFG_CLK>,
 			 <&gcc GCC_UBI0_DBG_CLK>,
 			 <&gcc GCC_UBI0_CORE_CLK>,
@@ -29,10 +33,8 @@
 			 <&gcc GCC_UBI0_AXI_CLK>,
 			 <&gcc GCC_SNOC_UBI0_AXI_CLK>,
 			 <&gcc GCC_UBI0_NC_AXI_CLK>;
-		clock-names = "nss-cfg-clk",
-			      "nss-dbg-clk",
-			      "nss-core-clk",
-			      "nss-utcm-clk",
+		clock-names = "nss-cfg-clk", "nss-dbg-clk",
+			      "nss-core-clk", "nss-utcm-clk",
 			      "nss-axi-clk",
 			      "nss-snoc-axi-clk",
 			      "nss-nc-axi-clk";
@@ -48,29 +50,30 @@
 		qcom,ipv4-reasm-enabled;
 		qcom,ipv6-enabled;
 		qcom,ipv6-reasm-enabled;
+		qcom,wlanredirect-enabled;
 		qcom,tun6rd-enabled;
 		qcom,l2tpv2-enabled;
 		qcom,gre-enabled;
+		qcom,gre-redir-enabled;
+		qcom,gre-redir-mark-enabled;
 		qcom,map-t-enabled;
+		qcom,portid-enabled;
 		qcom,pppoe-enabled;
 		qcom,pptp-enabled;
 		qcom,tunipip6-enabled;
 		qcom,shaping-enabled;
+		qcom,wlan-dataplane-offload-enabled;
+		qcom,pvxlan-enabled;
 		qcom,clmap-enabled;
 		qcom,vxlan-enabled;
 		qcom,match-enabled;
 		qcom,mirror-enabled;
 		qcom,crypto-enabled;
 		qcom,ipsec-enabled;
-		qcom,wlanredirect-enabled;
-		qcom,gre-redir-enabled;
-		qcom,gre-redir-mark-enabled;
-		qcom,portid-enabled;
-		qcom,wlan-dataplane-offload-enabled;
-		qcom,pvxlan-enabled;
-		qcom,rmnet_rx-enabled;
-		qcom,udp-st-enabled;
+		mx-supply = <&nss_dummy_reg>;
+		npu-supply = <&nss_dummy_reg>;
 	};
+
 
 	nss_crypto: qcom,nss_crypto {
 		compatible = "qcom,nss-crypto";
@@ -81,10 +84,9 @@
 		ranges;
 		ce5_node {
 			compatible = "qcom,ce5";
-			reg-names = "crypto_pbase",
-				    "bam_base";
+			reg-names = "crypto_pbase", "bam_base";
 			reg = <0x0073a000 0x6000>,
-			      <0x00704000 0x20000>;
+			    <0x00704000 0x20000>;
 			qcom,dma-mask = <0x0c>;
 			qcom,transform-enabled;
 			qcom,aes128-cbc;
@@ -113,4 +115,5 @@
 			};
 		};
 	};
+
 };
