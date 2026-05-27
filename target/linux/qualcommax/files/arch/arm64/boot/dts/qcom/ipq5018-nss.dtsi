@@ -12,7 +12,6 @@
 };
 
 &soc {
-
 	nss0: nss@40000000 {
 		compatible = "qcom,nss";
 		interrupts = <GIC_SPI 402 IRQ_TYPE_EDGE_RISING>,
